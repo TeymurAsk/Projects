@@ -1,2 +1,2 @@
 # Projects
-Little projects to improve my knowledge of Backend
+Little projects to improve my knowledge of Development
