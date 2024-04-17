@@ -1,0 +1,70 @@
+﻿body {
+}
+.chat-button {
+    background-color: black;
+    position: relative;
+    bottom: 199px;
+    border: solid;
+    border-radius: 30px;
+    border-color: #CEC3F1;
+    width: 290px;
+    color: #E7E7E8;
+    height: 50px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background-color 0.3s;
+}
+
+    .chat-button:hover {
+        background-color: #333333;
+        background-position: 100% 0;
+    }
+.sign-button {
+
+    background-image: linear-gradient(to right, #C7C2EC, transparent);
+    position: relative;
+    bottom: 199px;
+    border: solid;
+    left: 10px;
+    border-radius: 30px;
+    width: 290px;
+    height: 50px;
+    color:black;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background-color 0.5s;
+}
+
+    .sign-button:hover {
+        background-color: #D9B294;
+        background-position: 100% 0;
+    }
+.search-button {
+    opacity: 1;
+    background: linear-gradient(to right, #C7C2EC,#DACBD2, #D9B294);
+    border-radius: 50px;
+    height: 50px;
+    border: none;
+    width: 80px;
+    aspect-ratio: 1;
+    position: absolute;
+    top:133px;
+    right: 90px;
+}
+.details-button-insaved {
+    background-image: linear-gradient(to right, #C7C2EC, transparent);
+    position: relative;
+    bottom: 199px;
+    left: 13px;
+    border-radius: 30px;
+    width: 90%;
+    height: 50px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background-color 0.5s;
+}
+
+    .details-button-insaved:hover {
+        background-color: #D9B294;
+        background-position: 100% 0;
+    }

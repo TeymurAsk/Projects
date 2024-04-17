@@ -1,0 +1,73 @@
+﻿body {
+}
+.review{
+    width:70%;
+}
+.body-for-info {
+    position: relative;
+    bottom: 750px;
+    left: 970px;
+    height: 670px;
+    width: 330px;
+    background-color: #29292C;
+    border-radius: 20px;
+}
+.request-button {
+    background-image: linear-gradient(to right, #C7C2EC, transparent);
+    position: relative;
+    border-radius: 30px;
+    left: 20px;
+    width: 290px;
+    height: 40px;
+    cursor: pointer;
+    top:20px;
+    font-size: 22px;
+    transition: background-color 0.5s;
+}
+
+    .request-button:hover {
+        background-color: #D9B294;
+        background-position: 100% 0;
+    }
+.text-grad {
+    background: linear-gradient(to right, #C7C2EC, #D9B294);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-size: 40px;
+    font-family: Verdana;
+}
+.but-grad {
+    background-image: linear-gradient(to right, #4CAF50, #00bcd4, #9c27b0); /* Example gradient */
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    padding: 10px 20px;
+    color: white; /* Text color for the button */
+    cursor: pointer;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+    .but-grad:hover {
+        background-position: 100% 0;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
+.but-grad:focus {
+    outline: none;
+}
+.gradient-hover-effect {
+    /**/
+    position: relative;
+    border-radius: 30px;
+    left: 20px;
+    width: 290px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 22px;
+    background: linear-gradient(90deg, #C7C2EC, transparent) #C7C2EC;
+}
+
+    .gradient-hover-effect:hover, .gradient-hover-effect:focus {
+        background-color: #D9B294;
+        background-position: 100% 0;
+    }

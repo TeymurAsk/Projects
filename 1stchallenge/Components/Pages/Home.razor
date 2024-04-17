@@ -1,0 +1,164 @@
+﻿@page "/"
+@inject NavigationManager navman
+@inject EmployeeController employeecontroller
+<PageTitle>Home</PageTitle>
+<h1 class="text-grad" style="position:relative; top:32px; left: 10px; font-size:40px;background: linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%);-webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: Verdana;">
+    The best specialists are here!
+</h1>
+<br /><br />
+<input class="search-bar" placeholder="Search for contractor:" type="text"/>
+<button class="wrapper-button">
+    <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+<div class="vertical-line"></div>
+<span class="location">
+    <i class="fa-solid fa-map-location-dot" style="color: #ffffff;"></i>
+    &nbsp;
+    <select class="dropper">
+        <option>Warsaw</option>
+        <option>Berlin</option>
+        <option>Wroclow</option>
+        <option>Krakow</option>
+    </select>
+</span>
+<br /><br /><br />
+<div style="position:relative;bottom:20px;width:250px;height:50px;background-color:black;border-radius:50px;border:2px solid gold">
+    <p style="color:white; font-size:20px; position:relative;top:13%;left:20%">Available now</p>
+    <i class="fa-solid fa-bolt-lightning" style="position:relative;bottom:37px;left:15px;font-size:22px;color: #FFD43B;"></i>
+    <span style="position:relative;bottom:13px;right:43px;">
+        <label class="switch">
+        <input type="checkbox" @bind-value="Status">
+        <span class="slider round"></span>
+        </label>
+    </span>
+</div>
+
+<div style="position:relative;bottom:20px">
+    <button style="@styles[0];width:120px;" @onclick='(()=>{Filters("Waiter",0);})'>Waiter</button>
+    <button style="@styles[1];width:140px;" @onclick='(()=>{Filters("Bartender",1);})'>Bartenders</button>
+    <button style="@styles[2];width:120px;" @onclick='(()=>{Filters("Waitress",2);})'>Waitress</button>
+    <button style="@styles[3];width:200px;" @onclick='(()=>{Filters("Delivery person",3);})'>Delivery person</button>
+    <button style="@styles[4];width:120px;" @onclick='(()=>{Filters("Plumber",4);})'>Plumber</button>
+    <button style="@styles[5];width:120px;" @onclick='(()=>{Filters("Cleaner",5);})'>Cleaner</button>
+    <button style="@styles[6];width:120px;" @onclick='(()=>{Filters("Others",6);})'>Others</button>
+</div>
+<h2 style="position:relative;bottom:50px;left:20px;color:white">Results:</h2>
+<div class="people-grid">
+    @if (Status)
+    {
+        for(int i = 0; i<hot_filtered_employees.Count();i++)
+        {
+            if ( filters.Count()==0 || filters.Contains(hot_filtered_employees[i].JobTitle))
+            {
+            <div class="box user-card" style="background-color:black">
+                <div class="card-top">
+                    <h4 style="background: linear-gradient(to right, #C7C2EC, #D9B294);-webkit-text-fill-color: transparent;-webkit-background-clip: text">#AvailableNow</h4>
+                    <div class="price-per-hour">50pln/h</div>
+                    <img class="image-holder" src="https://i.imgur.com/LY5NH13.jpg" />
+                    <p style="position:relative;bottom:110px;left:100px;font-size:20px;color:white"><b>@hot_filtered_employees[i].Name @hot_filtered_employees[i].Surname</b></p>
+                    <p style="color:dimgray;position:relative;bottom:130px;left:100px;"><b>@hot_filtered_employees[i].JobTitle</b></p>
+                    <span style="position:relative;bottom:145px;left:98px;color:white"><i class="fa-solid fa-star"></i> @hot_filtered_employees[i].Rating</span>
+                    <hr style="position:relative;background-color: white;height:2px;bottom:150px;" />
+                    <p style="position:relative; bottom:165px;left:250px;color:#E7E7E8;opacity:0.3">4 days ago</p>
+                    <span style="position:relative;bottom:205px;">
+                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-regular fa-star" style="color: #ffffff;"></i>
+                    </span>
+                    <h5 style="position:relative;bottom:195px;color:white">Dodo Pizza</h5>
+                    <p style="position:relative;bottom:200px;color:#E7E7E8;opacity:0.5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aliquam laoreet ligula sed auctor pellentesque.
+                        Nam venenatis felis at leo pulvinar, ut interdum libero tincidunt.
+                        Aenean id orci diam. Ut accumsan lacus et ante viverra, at pellentesque enim interdum.
+                    </p>
+                    <button class="saving-button"><i class="fa-regular fa-heart" style="color:#CEC3F1;"></i></button>
+                    <button class="details-button" @onclick='(()=>{navman.NavigateTo("details/1");})'><b>Details</b></button>
+                </div>
+            </div>
+            }
+        }
+    }
+    else
+    {
+        for(int i = 0;i<cold_filtered_employees.Count();i++)
+        {
+            if (filters.Count() == 0 || filters.Contains(cold_filtered_employees[i].JobTitle))
+            {
+                <div class="box user-card" style="background-color:black">
+                    <div class="card-top">
+                        <h4 style="background: linear-gradient(to right, #C7C2EC, #D9B294);-webkit-text-fill-color: transparent;-webkit-background-clip: text">#ScheduleNow</h4>
+                        <div class="price-per-hour">50pln/h</div>
+                        <img class="image-holder" src="https://i.imgur.com/LY5NH13.jpg" />
+                        <p style="position:relative;bottom:110px;left:100px;font-size:20px;color:white"><b>@cold_filtered_employees[i].Name @cold_filtered_employees[i].Surname</b></p>
+                        <p style="color:dimgray;position:relative;bottom:130px;left:100px;"><b>@cold_filtered_employees[i].JobTitle</b></p>
+                        <span style="position:relative;bottom:145px;left:98px;color:white"><i class="fa-solid fa-star"></i> @cold_filtered_employees[i].Rating</span>
+                        <hr style="position:relative;background-color: white;height:2px;bottom:150px;" />
+                        <p style="position:relative; bottom:165px;left:250px;color:#E7E7E8;opacity:0.3">4 days ago</p>
+                        <span style="position:relative;bottom:205px;">
+                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-regular fa-star" style="color: #ffffff;"></i>
+                        </span>
+                        <h5 style="position:relative;bottom:195px;color:white">Dodo Pizza</h5>
+                        <p style="position:relative;bottom:200px;color:#E7E7E8;opacity:0.5">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Aliquam laoreet ligula sed auctor pellentesque.
+                            Nam venenatis felis at leo pulvinar, ut interdum libero tincidunt.
+                            Aenean id orci diam. Ut accumsan lacus et ante viverra, at pellentesque enim interdum.
+                        </p>
+                        <button class="saving-button"><i class="fa-regular fa-heart" style="color:#CEC3F1;"></i></button>
+                        <button class="details-button" @onclick='(()=>{navman.NavigateTo("details/1");})'><b>Details</b></button>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+@code{
+    [Parameter]
+    public bool Status { get; set; }
+    private List<string> filters = new List<string>();
+    private List<Employee> employees = new List<Employee>();
+    private List<Employee> hot_filtered_employees = new List<Employee>();
+    private List<Employee> cold_filtered_employees = new List<Employee>();
+    private List<string> styles = new List<string>()
+    {
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+        "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;",
+    };
+    protected override void OnInitialized()
+    {
+        employees = employeecontroller.Get();
+        for(int i = 0; i < employees.Count(); i++)
+        {
+            if (employees[i].Availability == "Hot")
+            {
+                hot_filtered_employees.Add(employees[i]);
+            }
+            else
+            {
+                cold_filtered_employees.Add(employees[i]);
+            }
+        }
+    }
+
+    private void Details()
+    {
+        navman.NavigateTo("details/1");
+    }
+    private void Filters(string filter, int id)
+    {
+        if (filters.Contains(filter))
+        {
+            styles[id] = "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;color:#aeaeae;position: relative;bottom: 50px;left: 300px;background-color: black;border-color: gray;font-size: 24px;";
+            filters.Remove(filter);
+        }
+        else
+        {
+            styles[id] = "border-radius: 50px;border: solid;border-width: 2px;height: 50px;opacity: 1;background-color: #CEC3F1;position: relative;bottom: 50px;left: 300px;font-size: 24px;color: black;border-color: #CEC3F1;";
+            filters.Add(filter);
+        }
+    }
+}

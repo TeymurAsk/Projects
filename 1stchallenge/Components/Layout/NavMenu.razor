@@ -1,0 +1,33 @@
+﻿@inject NavigationManager navman
+<div class="circle-logo" @onclick='(()=>{navman.NavigateTo("");})'>
+    <img class="D-image" src="D.png" />
+</div>
+
+<div class="square-for-circle-message">
+    <div class="circle-messages" @onclick='(()=>{navman.NavigateTo("messages");})'>
+        <i class="fa-regular fa-comment circle-icon-messages" style="font-size:40px"></i>
+    </div>
+    <p class="font-for-sidebar" style="color:#E7E7E8">Messages</p>
+</div>
+<div class="square-for-circle-agreements">
+    <div class="circle-agreements" @onclick='(()=>{navman.NavigateTo("agreements");})'>
+        <i class="fa-solid fa-briefcase circle-icon-agreements" style="font-size:40px"></i>
+    </div>
+    <p class="font-for-sidebar" style="color:#E7E7E8">Agreements</p>
+</div>
+<div class="square-for-circle-saved">
+    <div class="circle-saved" @onclick='(()=>{navman.NavigateTo("saved");})'>
+        <i class="fa-regular fa-heart circle-icon-saved" style="font-size:40px"></i>
+    </div>
+    <p class="font-for-sidebar" style="color:#E7E7E8">Saved</p>
+</div>
+<div class="square-for-circle-settings">
+    <div class="circle-settings" @onclick='(()=>{navman.NavigateTo("settings");})'>
+        <i class="fa-solid fa-gear circle-icon-settings" style="font-size:40px"></i>
+    </div>
+    <p class="font-for-sidebar" style="color:#E7E7E8">Settings</p>
+</div>
+
+@code{
+
+}

@@ -1,0 +1,98 @@
+﻿@page "/details/{id:int}"
+<p class="text-grad"><strong>Contractor Details</strong></p>
+<h2 style="color:white;opacity:0.9">Skills and expertise</h2>
+<button style="border-style: solid;border-radius:30px;background-color:black;border-width:3px;height:40px;position:relative;font-size:20px;border-color:#29292C;color:darkgray" disabled>
+    Waiters
+</button>
+&nbsp;
+<button style="border-style: solid;border-radius:30px;background-color:black;border-width:3px;height:40px;position:relative;font-size:20px;border-color:#29292C;color:darkgray" disabled>
+    Customer  Service
+</button>
+&nbsp;
+<button style="border-style: solid;border-radius:30px;background-color:black;border-width:3px;height:40px;position:relative;font-size:20px;border-color:#29292C;color:darkgray" disabled>
+    Cleaning
+</button>
+&nbsp;
+<button style="border-style: solid;border-radius:30px;background-color:black;border-width:3px;height:40px;position:relative;font-size:20px;border-color:#29292C;color:darkgray" disabled>
+    Kitchen Help
+</button>
+<h2 style="color:white;opacity:0.9">How can I help?</h2>
+<p style="width:65%; font-size:16px; color:white;opacity:0.7">
+    I'm Kate, a dedicated waitress with 6 years of experience in hospitality,
+    I thrive on providing exceptional service with a warm smile.
+    Whether it's recommending the perfect dish or ensuring every guest feels welcomed and valued,
+    I take pride in making dining experiences memorable.
+</p>
+<hr style="background-color: white;height:3px;width:67%;border-radius:10px;" />
+<h2 style="color:white;opacity:0.9">Reviews: &nbsp;&nbsp;<i class="fa-solid fa-star"></i> 4.3 (381)</h2>
+<div>
+    <div class="review">
+        <p style="color:#E7E7E8;">Name Surname</p>
+        <p style="color:white;opacity:0.7">
+            Attentive service and friendly demeanor consistently exceed our customers' expectations,
+            contributing greatly to the positive atmosphere of our establishment.
+        </p>
+        <br />
+    </div>
+    <div class="review">
+        <p style="color:#E7E7E8;">Name Surname</p>
+        <p style="color:white;opacity:0.7">
+            Attentive service and friendly demeanor consistently exceed our customers' expectations,
+            contributing greatly to the positive atmosphere of our establishment.
+        </p>
+        <br />
+    </div>
+    <div class="review">
+        <p style="color:#E7E7E8;">Name Surname</p>
+        <p style="color:white;opacity:0.7">
+            Attentive service and friendly demeanor consistently exceed our customers' expectations,
+            contributing greatly to the positive atmosphere of our establishment.
+        </p>
+        <br />
+    </div>
+</div>
+<div class="body-for-info">
+    <br />
+    <p style="font-size:24px;color:white;text-align:center">Waitress</p>
+    <img style="position:relative;left:125px;width:80px;height:80px;border-radius:50%;" src="https://i.imgur.com/LY5NH13.jpg" />
+    <p style="font-size:18px;color:whitesmoke;text-align:center">Kate J.</p>
+    <p style="position:relative;left:20px;font-size:16px;color:white">Summary</p>
+    <h4 style="position:relative;left:20px;font-size:16px;color:gray"><i class="fa-regular fa-calendar"></i>&nbsp; Start: Wed, Mar. 25 at 10AM</h4>
+    <h4 style="position:relative;left:43px;font-size:16px;color:gray">End: Thu, Mar. 26 at 10PM</h4>
+    <h4 style="position:relative;left:20px;font-size:16px;color:gray"><i class="fa-regular fa-clock"></i>&nbsp; 12h</h4>
+    <p style="position:relative;left:20px;font-size:16px;color:white">Task details</p>
+    <textarea style="resize:none;position:relative;left:20px;border-radius:10px;width:290px;background-color:#16171B;color:gray;height:70px;border-width:6px;border-color:#16171B"></textarea>
+    <p style="position:relative;left:20px;font-size:16px;color:white">Price details</p>
+    <h4 style="position:relative;left:20px;font-size:16px;color:gray">Hourly price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;45pln/h</h4>
+    <h4 style="position:relative;left:20px;font-size:16px;color:gray">Support fee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20pln/h</h4>
+    <h4 style="position:relative;left:20px;font-size:16px;color:gray">Total;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;555pln/h</h4>
+    @if(!request)
+    {
+        <button class="request-button" @onclick="(()=>{Submit_Request();})">Send the request</button>
+    }
+    else
+    {
+        <button style="position: relative;border:solid;border-radius: 30px;left: 20px;width: 290px;height: 40px;cursor: pointer;top:20px;font-size: 22px;color:#CEC3F1;background-color:#29292C" @onclick="(()=>{Submit_Request();})">
+            Waiting request
+        </button>
+    }
+</div>
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public int Rating { get; set; }
+
+    private bool request = false;
+    private void Submit_Request()
+    {
+        if(request == false)
+        {
+            request = true;
+        }
+        else
+        {
+            request = false;
+        }
+    }
+}

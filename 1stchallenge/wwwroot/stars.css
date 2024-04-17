@@ -1,0 +1,9 @@
+﻿.custom-scrollbar {
+    overflow: auto;
+    height: 300px;
+    /* Additional scrollbar track styling here (limited) */
+}
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background-color: red;
+    }

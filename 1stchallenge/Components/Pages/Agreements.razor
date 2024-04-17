@@ -1,0 +1,143 @@
+﻿@page "/agreements"
+@inject AgreementController agreementcontroller
+@inject EmployeeController employeecontroller
+<br />
+<p class="text-grad"><strong>Agreements</strong></p>
+<button style="position:relative;top:1px;width:91%;border:solid;background-color:#fff;border-radius:50px;height:62px;border-width:3px;border-color:#E7E7E8" disabled></button>
+<div style="position:relative;bottom:61px">
+    <button style="position:relative;left:2px;border:none;width:33%;background:@Color1;border-radius:50px;height:57px;color:@text_color1;z-index:1" @onclick="(()=>{Choose(1);})">
+        Accepted (@accepted_agreements.Count())
+    </button>
+    <button style="position:relative;right:58px;border:none;width:33%;background:@Color2;border-radius:50px;height:57px;color:@text_color2;z-index:@zIndex" @onclick="(()=>{Choose(2);})">
+        Progress (@inprocess_agreements.Count())
+    </button>
+    <button style="position:relative;right:120px;border:none;width:33%;background:@Color3;border-radius:50px;height:57px;color:@text_color3;z-index:1" @onclick="(()=>{Choose(3);})">
+        Declined (@decline_agreements.Count())
+    </button>
+</div>
+
+<h4 style="color:white;opacity:0.8; font-size:24px;">&nbsp;&nbsp;&nbsp; Apr 10, 2024</h4>
+<i class="fa-regular fa-calendar-days" style="position:relative;opacity:0.8;bottom:44px;color: #ffffff; font-size:18px;"></i>
+<div style="opacity:0.7;position:relative;bottom:65px;left:180px;height:20px;width:1.5px;background-color:white"></div>
+<i class="fa-regular fa-user" style="position:relative;bottom:87px;left:200px;color: #ffffff;opacity:0.8;font-size:18px"></i>
+<h4 style="position:relative;bottom:114px;left:230px;color:white;opacity:0.8; font-size:24px;">4 workers</h4>
+
+<div style="position:relative;left:10px;bottom:100px;grid-template-columns: repeat(4,23%);grid-column-gap:10px;width:100%;display:grid;grid-row-gap:10px;">
+    @if(text_color1 == "black")
+    {
+        for (int i = 0; i < accepted_agreements.Count(); i++)
+        {
+            <div style="width:310px;height:320px;border:solid;border-radius:30px;border-color:#CEC3F1;border-width:2px;background-color:black">
+                <img class="image-holder" style="position:relative;top:30px;left:15px" src="https://i.imgur.com/LY5NH13.jpg" />
+                <p style="position:relative;left:105px;bottom:50px;font-size:18px;color:white"><b>@employeecontroller.Get(accepted_agreements[i].EmployeeId).Name @employeecontroller.Get(accepted_agreements[i].EmployeeId).Surname</b></p>
+                <p style="position:relative;left:105px;bottom:67px;font-size:14px;color:white;opacity:0.7"><b>@employeecontroller.Get(accepted_agreements[i].EmployeeId).JobTitle</b></p>
+                <span style="position:relative;bottom:80px;left:105px;color:white"><i class="fa-solid fa-star"></i> @employeecontroller.Get(accepted_agreements[i].EmployeeId).Rating</span>
+                <button class="chat-button" style="position:relative;bottom:50px;left:10px">Open chat</button>
+                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Sign the contract</button>
+                <p style="position:relative;bottom:12px;left:70px;color:white">Time for accept:</p>
+                <p style="font-size:18px;position:relative;bottom:53px;left:190px;color:#CEC3F1"><b>5:04</b></p>
+            </div>
+        }
+    }
+    else if (text_color2 == "black")
+    {
+        for (int i = 0; i < inprocess_agreements.Count(); i++)
+        {
+            <div style="width:310px;height:320px;border:solid;border-radius:30px;border-color:#CEC3F1;border-width:2px;background-color:black">
+                <img class="image-holder" style="position:relative;top:30px;left:15px" src="https://i.imgur.com/LY5NH13.jpg" />
+                <p style="position:relative;left:105px;bottom:50px;font-size:18px;color:white"><b>@employeecontroller.Get(inprocess_agreements[i].EmployeeId).Name @employeecontroller.Get(inprocess_agreements[i].EmployeeId).Surname</b></p>
+                <p style="position:relative;left:105px;bottom:67px;font-size:14px;color:white;opacity:0.7"><b>@employeecontroller.Get(inprocess_agreements[i].EmployeeId).JobTitle</b></p>
+                <span style="position:relative;bottom:80px;left:105px;color:white"><i class="fa-solid fa-star"></i> @employeecontroller.Get(inprocess_agreements[i].EmployeeId).Rating</span>
+                <button class="chat-button" style="position:relative;bottom:50px;left:10px">Open chat</button>
+                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Sign the contract</button>
+                <p style="position:relative;bottom:12px;left:70px;color:white">Time for accept:</p>
+                <p style="font-size:18px;position:relative;bottom:53px;left:190px;color:#CEC3F1"><b>5:04</b></p>
+            </div>
+        }
+    }
+    else
+    {
+        for (int i = 0; i < decline_agreements.Count(); i++)
+        {
+            <div style="width:310px;height:320px;border:solid;border-radius:30px;border-color:#CEC3F1;border-width:2px;background-color:black">
+                <img class="image-holder" style="position:relative;top:30px;left:15px" src="https://i.imgur.com/LY5NH13.jpg" />
+                <p style="position:relative;left:105px;bottom:50px;font-size:18px;color:white"><b>@employeecontroller.Get(decline_agreements[i].EmployeeId).Name @employeecontroller.Get(decline_agreements[i].EmployeeId).Surname</b></p>
+                <p style="position:relative;left:105px;bottom:67px;font-size:14px;color:white;opacity:0.7"><b>@employeecontroller.Get(decline_agreements[i].EmployeeId).JobTitle</b></p>
+                <span style="position:relative;bottom:80px;left:105px;color:white"><i class="fa-solid fa-star"></i> @employeecontroller.Get(decline_agreements[i].EmployeeId).Rating</span>
+                <button class="chat-button" style="position:relative;bottom:50px;left:10px">Open chat</button>
+                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Sign the contract</button>
+                <p style="position:relative;bottom:12px;left:70px;color:white">Time for accept:</p>
+                <p style="font-size:18px;position:relative;bottom:53px;left:190px;color:#CEC3F1"><b>5:04</b></p>
+            </div>
+        }
+    }
+</div>
+
+
+
+@code {
+    private List<Agreement> agreements = new List<Agreement>();
+    private List<Agreement> accepted_agreements = new List<Agreement>();
+    private List<Agreement> decline_agreements = new List<Agreement>();
+    private List<Agreement> inprocess_agreements = new List<Agreement>();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        agreements = agreementcontroller.Get();
+        for(int i = 0;i<agreements.Count(); i++)
+        {
+            if (agreements[i].Status == "Declined")
+            {
+                decline_agreements.Add(agreements[i]);
+            }
+            else if (agreements[i].Status == "Accepted")
+            {
+                accepted_agreements.Add(agreements[i]);
+            }
+            else
+            {
+                inprocess_agreements.Add(agreements[i]);
+            }
+        }
+    }
+    private int zIndex = 2;
+    private string Color1 = "black";
+    private string Color2 = "linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%)";
+    private string Color3 = "black";
+    private string text_color1 = "white";
+    private string text_color2 = "black";
+    private string text_color3 = "white";
+    private void Choose(int id)
+    {
+        if(id == 1)
+        {
+            Color1 = "linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%)";
+            Color2 = "black";
+            Color3 = "black";
+            text_color1 = "black";
+            text_color2 = "white";
+            text_color3 = "white";
+            zIndex = 0;
+        }
+        else if(id == 2)
+        {
+            Color2 = "linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%)";
+            Color3 = "black";
+            Color1 = "black";
+            text_color1 = "white";
+            text_color2 = "black";
+            text_color3 = "white";
+            zIndex = 2;
+        }
+        else
+        {
+            Color3 = "linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%)";
+            Color2 = "black";
+            Color1 = "black";
+            text_color1 = "white";
+            text_color2 = "white";
+            text_color3 = "black";
+            zIndex = 0;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+﻿@page "/saved"
+@inject NavigationManager navman
+@inject EmployerController employercontroller
+@inject EmployeeController employeecontroller
+<h1 class="text-grad" style="position:relative; top:32px; left: 10px; font-size:40px;background: linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%);-webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: Verdana;">
+    Saved ones
+</h1>
+<input class="search-bar" style="position:relative;top:50px;" placeholder="Search for contractor:" type="text" />
+<button class="search-button" >
+    <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+<div class="people-grid" style="position:relative;top:120px">
+    @foreach(var employee in saved_employee)
+    {
+        <div class="box user-card" style="background-color:black">
+            <div class="card-top">
+                <h4 style="background: linear-gradient(to right, #C7C2EC, #D9B294);-webkit-text-fill-color: transparent;-webkit-background-clip: text">#AvailableNow</h4>
+                <div class="price-per-hour">50pln/h</div>
+                <img class="image-holder" src="https://i.imgur.com/LY5NH13.jpg" />
+                <p style="position:relative;bottom:110px;left:100px;font-size:20px;color:white"><b>@employee.Name @employee.Surname</b></p>
+                <p style="color:dimgray;position:relative;bottom:130px;left:100px;"><b>@employee.JobTitle</b></p>
+                <span style="position:relative;bottom:145px;left:98px;color:white"><i class="fa-solid fa-star"></i> @employee.Rating</span>
+                <hr style="position:relative;background-color: white;height:2px;bottom:150px;" />
+                <p style="position:relative; bottom:165px;left:250px;color:#E7E7E8;opacity:0.3">4 days ago</p>
+                <span style="position:relative;bottom:205px;">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-regular fa-star" style="color: #ffffff;"></i>
+                </span>
+                <h5 style="position:relative;bottom:195px;color:white">Dodo Pizza</h5>
+                <p style="position:relative;bottom:200px;color:#E7E7E8;opacity:0.5">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Aliquam laoreet ligula sed auctor pellentesque.
+                    Nam venenatis felis at leo pulvinar, ut interdum libero tincidunt.
+                    Aenean id orci diam. Ut accumsan lacus et ante viverra, at pellentesque enim interdum.
+                </p>
+                <button class="details-button-insaved" @onclick='(()=>{navman.NavigateTo("details/1");})'><b>Details</b></button>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    private List<int> saved_numbers = new List<int>();
+    private List<Employee> saved_employee = new List<Employee>();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        saved_numbers = employercontroller.Get(1).Saved.Split(',').Select(s => int.Parse(s)).ToList();
+        for(int i = 0; i < saved_numbers.Count(); i++)
+        {
+            saved_employee.Add(employeecontroller.Get(saved_numbers[i]));
+        }
+    }
+}
