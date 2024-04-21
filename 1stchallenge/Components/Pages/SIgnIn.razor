@@ -1,0 +1,52 @@
+﻿@page "/signin"
+@inject EmployerController employercontroller
+@inject DisplayService displayservice
+@inject NavigationManager navman
+<PageTitle>Sign In</PageTitle>
+<div id="particles-js">
+    <div style="position: absolute;border:solid;border-width:2px;border-color:#CEC3F1;border-radius:30px; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 360px; background-color: black;">
+        <div>
+            <label style="color:whitesmoke;font-size:18px;position:relative;left:20px;top:20px">Name</label>
+            <div style="position:relative;top:20px">
+                <input type="text" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:460px" @bind-value="Name"> 
+            </div>
+            <br />
+            <label style="color:whitesmoke;font-size:18px;position:relative;left:20px;top:20px">Surname</label>
+            <div style="position:relative;top:20px">
+                <input type="text" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:460px" @bind-value="Surname">
+            </div>
+            <br />
+            <label style="color:whitesmoke;font-size:18px;position:relative;left:20px;top:20px">Password</label>
+            <div style="position:relative;top:20px;">
+                <input type="password" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:460px" @bind-value="Password">
+            </div>
+        </div>
+        <button class="signup-confirm-button" @onclick="(()=>{Signin();})">Sign In!</button>
+    </div>
+</div>
+
+
+<script src="particles.js"></script>
+<script src="app.js"></script>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+    [Parameter]
+    public string Surname { get; set; }
+    [Parameter]
+    public string Password { get; set; }
+
+
+    private void Signin()
+    {
+        foreach(var employer in employercontroller.Get())
+        {
+            if (employer.Name == Name && employer.Password == Password && employer.Surname == Surname)
+            {
+                displayservice.display = true;
+                navman.NavigateTo("/");
+            }
+        }
+    }
+}

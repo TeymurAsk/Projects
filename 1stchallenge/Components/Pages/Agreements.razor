@@ -33,7 +33,7 @@
                 <p style="position:relative;left:105px;bottom:67px;font-size:14px;color:white;opacity:0.7"><b>@employeecontroller.Get(accepted_agreements[i].EmployeeId).JobTitle</b></p>
                 <span style="position:relative;bottom:80px;left:105px;color:white"><i class="fa-solid fa-star"></i> @employeecontroller.Get(accepted_agreements[i].EmployeeId).Rating</span>
                 <button class="chat-button" style="position:relative;bottom:50px;left:10px">Open chat</button>
-                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Sign the contract</button>
+                <button class="sign-button" style="position:relative;bottom:30px;right:100px" @onclick="(()=>{Sign(i);})">Sign the contract</button>
                 <p style="position:relative;bottom:12px;left:70px;color:white">Time for accept:</p>
                 <p style="font-size:18px;position:relative;bottom:53px;left:190px;color:#CEC3F1"><b>5:04</b></p>
             </div>
@@ -49,7 +49,7 @@
                 <p style="position:relative;left:105px;bottom:67px;font-size:14px;color:white;opacity:0.7"><b>@employeecontroller.Get(inprocess_agreements[i].EmployeeId).JobTitle</b></p>
                 <span style="position:relative;bottom:80px;left:105px;color:white"><i class="fa-solid fa-star"></i> @employeecontroller.Get(inprocess_agreements[i].EmployeeId).Rating</span>
                 <button class="chat-button" style="position:relative;bottom:50px;left:10px">Open chat</button>
-                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Sign the contract</button>
+                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Details</button>
                 <p style="position:relative;bottom:12px;left:70px;color:white">Time for accept:</p>
                 <p style="font-size:18px;position:relative;bottom:53px;left:190px;color:#CEC3F1"><b>5:04</b></p>
             </div>
@@ -65,9 +65,7 @@
                 <p style="position:relative;left:105px;bottom:67px;font-size:14px;color:white;opacity:0.7"><b>@employeecontroller.Get(decline_agreements[i].EmployeeId).JobTitle</b></p>
                 <span style="position:relative;bottom:80px;left:105px;color:white"><i class="fa-solid fa-star"></i> @employeecontroller.Get(decline_agreements[i].EmployeeId).Rating</span>
                 <button class="chat-button" style="position:relative;bottom:50px;left:10px">Open chat</button>
-                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Sign the contract</button>
-                <p style="position:relative;bottom:12px;left:70px;color:white">Time for accept:</p>
-                <p style="font-size:18px;position:relative;bottom:53px;left:190px;color:#CEC3F1"><b>5:04</b></p>
+                <button class="sign-button" style="position:relative;bottom:30px;right:100px">Remove</button>
             </div>
         }
     }
@@ -99,6 +97,10 @@
                 inprocess_agreements.Add(agreements[i]);
             }
         }
+    }
+    private void Sign(int id)
+    {
+        
     }
     private int zIndex = 2;
     private string Color1 = "black";

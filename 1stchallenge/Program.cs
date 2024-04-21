@@ -1,7 +1,9 @@
 using _1stchallenge.Components;
+using _1stchallenge.Components.Pages;
 using _1stchallenge.Controllers;
 using _1stchallenge.Data;
 using _1stchallenge.Hubs;
+using _1stchallenge.Services;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<AgreementController>();
 builder.Services.AddScoped<EmployeeController>();
 builder.Services.AddScoped<EmployerController>();
+builder.Services.AddScoped<DisplayService>();
 builder.Services.AddScoped<RequestController>();
 builder.Services.AddResponseCompression(opts =>
 {

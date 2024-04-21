@@ -21,6 +21,8 @@ public partial class DasherContext : DbContext
 
     public virtual DbSet<Employer> Employers { get; set; }
 
+    public virtual DbSet<Message> Messages { get; set; }
+
     public virtual DbSet<Request> Requests { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -68,6 +70,15 @@ public partial class DasherContext : DbContext
             entity.Property(e => e.Surname)
                 .HasMaxLength(400)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Message>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Message1)
+                .HasColumnType("text")
+                .HasColumnName("Message");
+            entity.Property(e => e.Time).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Request>(entity =>

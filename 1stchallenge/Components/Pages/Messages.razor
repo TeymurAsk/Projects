@@ -82,12 +82,6 @@
             <div class="message-box-2" style="float:right;padding-left:10px;position:relative;right:10px">
                 <strong>Hello. Yes, sure.</strong>
             </div>
-            <div class="message-box">
-                Hello, could you send that request of yours again? I had some troubles answering on it lately.
-            </div>
-            <div class="message-box-2" style="float:right;padding-left:10px;position:relative;right:10px">
-                <strong>Hello. Yes, sure.</strong>
-            </div>
             <br /><br />
             <div class="message-box">
                 Hello, could you send that request of yours again? I had some troubles answering on it lately.
@@ -110,11 +104,17 @@
                 <strong>Hello. Yes, sure.</strong>
             </div>
             <br /><br />
+            <div class="message-box">
+                Hello, could you send that request of yours again? I had some troubles answering on it lately.
+            </div>
+            <div class="message-box-2" style="float:right;padding-left:10px;position:relative;right:10px">
+                <strong>Hello. Yes, sure.</strong>
+            </div>
             <br /><br />
             @foreach(var message in messages)
             {
                 <div class="message-box-2" style="float:right;padding-left:10px;position:relative;right:10px">
-                    @message
+                    <strong>@message</strong>
                 </div>
                 <br /><br />
             }

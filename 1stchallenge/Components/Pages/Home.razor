@@ -1,10 +1,24 @@
 ﻿@page "/"
 @inject NavigationManager navman
 @inject EmployeeController employeecontroller
+@inject DisplayService displayservice
 <PageTitle>Home</PageTitle>
 <h1 class="text-grad" style="position:relative; top:32px; left: 10px; font-size:40px;background: linear-gradient(269.78deg, #D9B294 0.21%, #DACBD2 47.17%, #C7C2EC 98.04%);-webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: Verdana;">
     The best specialists are here!
 </h1>
+@if (!(displayservice.display))
+{
+    <button class="signup-button" @onclick='(()=>{navman.NavigateTo("signup");})'>
+        Start Now
+    </button>
+    <button class="signin-button" @onclick='(()=>{navman.NavigateTo("signin");})'>Sign In</button>
+}
+else
+{
+    <button class="signin-button" style="position:relative;left:1170px" @onclick='(()=>{Logout();})'>
+        Logout
+    </button>
+}
 <br /><br />
 <input class="search-bar" placeholder="Search for contractor:" type="text"/>
 <button class="wrapper-button">
@@ -48,16 +62,16 @@
     {
         for(int i = 0; i<hot_filtered_employees.Count();i++)
         {
-            if ( filters.Count()==0 || filters.Contains(hot_filtered_employees[i].JobTitle))
+            if (filters.Count() == 0 || filters.Contains(hot_filtered_employees[i].JobTitle))
             {
             <div class="box user-card" style="background-color:black">
                 <div class="card-top">
                     <h4 style="background: linear-gradient(to right, #C7C2EC, #D9B294);-webkit-text-fill-color: transparent;-webkit-background-clip: text">#AvailableNow</h4>
                     <div class="price-per-hour">50pln/h</div>
                     <img class="image-holder" src="https://i.imgur.com/LY5NH13.jpg" />
-                    <p style="position:relative;bottom:110px;left:100px;font-size:20px;color:white"><b>@hot_filtered_employees[i].Name @hot_filtered_employees[i].Surname</b></p>
-                    <p style="color:dimgray;position:relative;bottom:130px;left:100px;"><b>@hot_filtered_employees[i].JobTitle</b></p>
-                    <span style="position:relative;bottom:145px;left:98px;color:white"><i class="fa-solid fa-star"></i> @hot_filtered_employees[i].Rating</span>
+                        <p style="position:relative;bottom:110px;left:100px;font-size:20px;color:white"><b>@hot_filtered_employees[i].Name @hot_filtered_employees[i].Surname</b></p>
+                        <p style="color:dimgray;position:relative;bottom:130px;left:100px;"><b>@hot_filtered_employees[i].JobTitle</b></p>
+                        <span style="position:relative;bottom:145px;left:98px;color:white"><i class="fa-solid fa-star"></i> @hot_filtered_employees[i].Rating</span>
                     <hr style="position:relative;background-color: white;height:2px;bottom:150px;" />
                     <p style="position:relative; bottom:165px;left:250px;color:#E7E7E8;opacity:0.3">4 days ago</p>
                     <span style="position:relative;bottom:205px;">
@@ -79,7 +93,7 @@
     }
     else
     {
-        for(int i = 0;i<cold_filtered_employees.Count();i++)
+        for (int i = 0; i < cold_filtered_employees.Count(); i++)
         {
             if (filters.Count() == 0 || filters.Contains(cold_filtered_employees[i].JobTitle))
             {
@@ -147,6 +161,11 @@
     private void Details()
     {
         navman.NavigateTo("details/1");
+    }
+    private void Logout()
+    {
+        displayservice.display = false;
+        navman.NavigateTo("", true);
     }
     private void Filters(string filter, int id)
     {

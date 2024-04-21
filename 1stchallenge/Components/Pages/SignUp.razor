@@ -1,0 +1,74 @@
+﻿@page "/signup"
+@inject EmployerController employercontroller
+@inject NavigationManager navman
+<PageTitle>Sign Up</PageTitle>
+<div id="particles-js">
+    <div style="position: absolute;border:solid;border-width:2px;border-color:#CEC3F1;border-radius:30px; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 440px; background-color: black;">
+        <div>
+            <label style="color:whitesmoke;font-size:18px;position:relative;top:20px;left:20px">Name</label>
+            <label style="color:whitesmoke;font-size:18px;position:relative;top:20px;left:202px">Surname</label>
+            <div style="position:relative;top:20px">
+                <input type="text" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:220px" @bind-value="Name">
+                <input type="text" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:30px; width:220px" @bind-value="Surname">
+            </div> 
+            <br />
+            <label style="color:whitesmoke;font-size:18px;position:relative;left:20px;top:20px">Password</label>
+            <div style="position:relative;top:20px">
+                <input type="password" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:460px" @bind-value="Password">
+            </div>
+            <br />
+            <label style="color:whitesmoke;font-size:18px;position:relative;left:20px;top:20px">Company name</label>
+            <div style="position:relative;top:20px">
+                <input type="text" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:460px" @bind-value="CompanyName">
+            </div>
+            <br />
+            <label style="color:whitesmoke;font-size:18px;position:relative;left:20px;top:20px">City</label>
+            <div style="position:relative;top:20px;">
+                <input type="text" style="border:solid;border-radius:10px;border-width:2px;border-color:gray;color:whitesmoke;background-color:black;padding:5px;position:relative;left:20px; width:460px" @bind-value="City">
+            </div>
+        </div>
+        <button class="signup-confirm-button" @onclick="(()=>{Signup();})">Sign Up!</button>
+    </div>
+</div>
+
+
+<script src="particles.js"></script>
+<script src="app.js"></script>
+@code {
+    [Parameter]
+    public string Name { get; set; }
+    [Parameter]
+    public string Surname { get; set; }
+    [Parameter]
+    public string Password { get; set; }
+    [Parameter]
+    public string CompanyName { get; set; }
+    [Parameter]
+    public string City { get; set; }
+    private bool check=true;
+    private void Signup()
+    {
+        Employer employer = new Employer();
+        employer.Id = employercontroller.Get().Count+1;
+        employer.City = City;
+        employer.Password = Password;
+        employer.Name = Name;
+        employer.Surname = Surname;
+        employer.CompanyName = CompanyName;
+        if (employer!=null)
+        {
+            foreach(var emp in employercontroller.Get())
+            {
+                if(emp.Name == employer.Name && emp.Surname == employer.Surname)
+                {
+                    check=false;
+                }
+            }
+            if (check)
+            {
+                employercontroller.Post(employer);
+                navman.NavigateTo("");
+            }
+        }
+    }
+}
